@@ -1,6 +1,8 @@
 package gulas.saveli.finalLibrary.library.controller;
 
-import gulas.saveli.library4.Interfaces.LibraryController;
+import gulas.saveli.finalLibrary.library.model.Book;
+import gulas.saveli.finalLibrary.library.service.BookService;
+import gulas.saveli.finalLibrary.repo.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,7 +10,7 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping(path = "api/book")
-public class BookController implements LibraryController<Book> {
+public class BookController {
     private final BookService bookService;
     private final BookRepository bookRepository;
     @Autowired
@@ -18,25 +20,21 @@ public class BookController implements LibraryController<Book> {
     }
 
     @GetMapping
-    @Override
     public Collection<Book> getAll() {
         return null;
     }
 
     @GetMapping(path = "{bookId}")
-    @Override
     public Book getById(@PathVariable("bookId") Long bookId) {
         return bookService.getById(bookId);
     }
 
     @PostMapping
-    @Override
     public void registerNewObject(@RequestBody Book book) {
         bookService.save(book);
     }
 
     @DeleteMapping("{bookId}")
-    @Override
     public void deleteById(@PathVariable("bookId") Long bookId) {
         bookService.deleteById(bookId);
     }
