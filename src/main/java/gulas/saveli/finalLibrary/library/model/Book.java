@@ -1,6 +1,6 @@
 package gulas.saveli.finalLibrary.library.model;
 
-import gulas.saveli.library4.UserPackage.User.User;
+import gulas.saveli.finalLibrary.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
