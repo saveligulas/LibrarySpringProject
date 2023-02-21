@@ -1,6 +1,6 @@
 package gulas.saveli.finalLibrary.security.config;
 
-import gulas.saveli.securityDemo.user.UserRepository;
+import gulas.saveli.finalLibrary.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

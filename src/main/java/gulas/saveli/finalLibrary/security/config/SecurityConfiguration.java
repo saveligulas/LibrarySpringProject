@@ -1,5 +1,6 @@
 package gulas.saveli.finalLibrary.security.config;
 
+import gulas.saveli.finalLibrary.security.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,7 +27,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers("/auth/**")
                 .permitAll()
-                .requestMatchers("/user")
+                .requestMatchers("/api/**")
                 .hasAuthority("USER_AUTHORITIES")
                 .anyRequest()
                 .authenticated()
