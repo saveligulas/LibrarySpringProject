@@ -28,14 +28,4 @@ public class BookController {
     public Book getById(@PathVariable("bookId") Long bookId) {
         return bookService.getById(bookId);
     }
-
-    @PostMapping
-    public void registerNewObject(@RequestBody Book book) {
-        bookService.save(book);
-    }
-
-    @DeleteMapping("{bookId}")
-    public void deleteById(@PathVariable("bookId") Long bookId) {
-        bookService.deleteById(bookId);
-    }
 }
