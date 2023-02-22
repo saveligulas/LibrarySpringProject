@@ -18,12 +18,12 @@ public class AdminBookController {
     @Autowired
     private final BookService bookService;
 
-    @PostMapping
+    @PostMapping("/register")
     public void registerNewObject(@RequestBody Book book) {
         bookService.save(book);
     }
 
-    @DeleteMapping("{bookId}")
+    @DeleteMapping("/delete/{bookId}")
     public void deleteById(@PathVariable("bookId") Long bookId) {
         bookService.deleteById(bookId);
     }
