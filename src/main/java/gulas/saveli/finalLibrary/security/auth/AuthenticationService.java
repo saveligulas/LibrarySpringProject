@@ -20,19 +20,40 @@ public class AuthenticationService {
     private final AuthenticationManager authenticationManager;
 
 
-    public AuthenticationResponse register(RegisterRequest request) {
-        var user = User.builder()
-                .firstName(request.getFirstName())
-                .lastName(request.getLastName())
-                .email(request.getEmail())
-                .password(passwordEncoder.encode(request.getPassword()))
-                .role(Role.USER)
-                .build();
-        userRepository.save(user);
-        var jwtToken = jwtService.generateToken(user);
-        return AuthenticationResponse.builder()
-                .token(jwtToken)
-                .build();
+    public String register(RegisterRequest request) {
+        if(userRepository.findByEmail(request.getEmail()).isEmpty()) {
+            var user = User.builder()
+                    .firstName(request.getFirstName())
+                    .lastName(request.getLastName())
+                    .email(request.getEmail())
+                    .password(passwordEncoder.encode(request.getPassword()))
+                    .role(Role.USER)
+                    .build();
+            userRepository.save(user);
+            return "User registered successfully";
+        } else {
+            throw new IllegalStateException("User with email already exists");
+        }
+
+//        var jwtToken = jwtService.generateToken(user);
+//        return AuthenticationResponse.builder()
+//                .token(jwtToken)
+//                .build();
+    }
+
+    public void registerAdmin(RegisterRequest user) {
+        if(userRepository.findByEmail(user.getEmail()).isEmpty()) {
+            var admin = User.builder()
+                    .firstName(user.getFirstName())
+                    .lastName(user.getLastName())
+                    .email(user.getEmail())
+                    .password(passwordEncoder.encode(user.getPassword()))
+                    .role(Role.ADMIN)
+                    .build();
+            userRepository.save(admin);
+        } else {
+            throw new IllegalStateException("User with email already exists");
+        }
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
