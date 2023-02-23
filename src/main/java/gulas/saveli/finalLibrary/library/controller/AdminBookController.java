@@ -1,11 +1,15 @@
 package gulas.saveli.finalLibrary.library.controller;
 
+import gulas.saveli.finalLibrary.library.errorHandler.exception.EntityNotFoundException;
 import gulas.saveli.finalLibrary.library.model.Book;
 import gulas.saveli.finalLibrary.library.service.BookService;
 import gulas.saveli.finalLibrary.repo.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/admin/book")
@@ -18,13 +22,23 @@ public class AdminBookController {
     @Autowired
     private final BookService bookService;
 
+    @GetMapping("/available")
+    public List<Book> getAvailableBooks() {
+        return bookService.getAvailableBooks();
+    }
+
+    @GetMapping("unavailable")
+    public List<Book> getUnavailableBooks() {
+        return bookService.getUnavailableBooks();
+    }
+
     @PostMapping("/register")
     public void registerNewObject(@RequestBody Book book) {
         bookService.save(book);
     }
 
     @DeleteMapping("/delete/{bookId}")
-    public void deleteById(@PathVariable("bookId") Long bookId) {
+    public void deleteById(@PathVariable("bookId") Long bookId) throws EntityNotFoundException {
         bookService.deleteById(bookId);
     }
 }
