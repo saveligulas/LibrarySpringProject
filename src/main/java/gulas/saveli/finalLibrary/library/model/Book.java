@@ -2,10 +2,12 @@ package gulas.saveli.finalLibrary.library.model;
 
 import gulas.saveli.finalLibrary.user.User;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.Set;
 
 @Entity
@@ -33,4 +35,15 @@ public class Book {
             inverseJoinColumns = @JoinColumn(name = "genre_id")
     )
     private Set<Genre> genres;
+    @Setter(AccessLevel.NONE)private LocalDate dor;
+    @Setter(AccessLevel.NONE)private Boolean available;
+
+    public void setDor(LocalDate dor) {
+        this.available = dor == null;
+        this.dor = dor;
+    }
+
+    public void setAvailable(Boolean available) {
+        this.available = available;
+    }
 }
