@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -38,5 +39,13 @@ public class BookService {
             throw new IllegalStateException("Book with id " + id + " does not exist");
         }
         bookRepository.deleteById(id);
+    }
+
+    public List<Book> getUnavailableBooks() {
+        return bookRepository.findByAvailableFalse();
+    }
+
+    public List<Book> getAvailableBooks() {
+        return bookRepository.findByAvailableTrue();
     }
 }
