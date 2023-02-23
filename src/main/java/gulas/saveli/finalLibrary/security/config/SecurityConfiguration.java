@@ -30,7 +30,7 @@ public class SecurityConfiguration {
                 .requestMatchers("/api/**")
                 .hasAuthority("USER_AUTHORITIES")
                 .requestMatchers("/admin/**")
-                .hasRole("ADMIN")
+                .hasAuthority("EDIT_LIBRARY")
                 .anyRequest()
                 .authenticated()
                 .and()
