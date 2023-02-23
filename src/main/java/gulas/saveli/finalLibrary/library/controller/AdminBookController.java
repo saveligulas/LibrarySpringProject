@@ -27,7 +27,7 @@ public class AdminBookController {
         return bookService.getAvailableBooks();
     }
 
-    @GetMapping("unavailable")
+    @GetMapping("/unavailable")
     public List<Book> getUnavailableBooks() {
         return bookService.getUnavailableBooks();
     }
@@ -35,6 +35,18 @@ public class AdminBookController {
     @PostMapping("/register")
     public void registerNewObject(@RequestBody Book book) {
         bookService.save(book);
+    }
+
+    @PutMapping("/edit/{bookId}")
+    public void editBook(
+            @PathVariable Long bookId,
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Long genreId,
+            @RequestParam(required = false) List<Long> genreIdList,
+            @RequestParam(required = false) Long authorId,
+            @RequestParam(required = false) Long publisherId
+    ) {
+        bookService.editBook(bookId, name, genreId, genreIdList, authorId, publisherId);
     }
 
     @DeleteMapping("/delete/{bookId}")
