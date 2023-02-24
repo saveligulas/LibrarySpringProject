@@ -14,7 +14,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Author {
+public class Author { //test
     @Id
     @GeneratedValue
     private Long id;
