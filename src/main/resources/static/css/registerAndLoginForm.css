@@ -38,3 +38,10 @@ main {
     margin: 1rem;
     display: flex;
 }
+
+.cta{
+    flex-direction: column;
+    margin: 1rem;
+    display: flex;
+    align-items: center;
+}

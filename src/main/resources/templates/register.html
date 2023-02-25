@@ -2,13 +2,39 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
     <meta charset="ISO-8859-1">
 <head>
-    <link href="/src/main/resources/static/css/register.css" rel="stylesheet"/>
+    <link href="/src/main/resources/static/css/registerAndLoginForm.css" rel="stylesheet"/>
 </head>
 <body>
-    <script src="src\main\resources\static\js\register.js"></script>
-    <div align="center">
-        <h1>Register</h1>
-    </div>
+    <main>
+        <section id="register-page" class="container container-front">
+            <header>
+                <h1>Register</h1>
+            </header>
+            <div>
+                <div class="nameInput">
+                    <label for="firstName">First Name</label>
+                    <input type="text" id="firstName" min="1" max="50"/>
+                </div>
+                <div class="nameInput">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" id="lastName" min="1" max="50"/>
+                </div>
+                <div class="nameInput">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" min="5" max="50"/>
+                </div>
+                <div class="nameInput">
+                    <label for="password">Password</label>
+                    <span>6-36 Characters</span>
+                    <input type="password" id="password" min="6" max="36"/>
+                </div>
+                <div class="cta">
+                    <button id="cta" type="submit">Submit</button>
+                </div>
+            </div>
+        
+        </section>
+    </main>
 </body>
 
 </html>
