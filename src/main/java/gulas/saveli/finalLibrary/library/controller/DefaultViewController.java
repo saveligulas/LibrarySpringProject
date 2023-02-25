@@ -1,5 +1,7 @@
 package gulas.saveli.finalLibrary.library.controller;
 
+import gulas.saveli.finalLibrary.library.controller.builder.ThymeleafModelAndViewBuilder;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -12,13 +14,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @RestController
 @RequestMapping("/")
+@RequiredArgsConstructor
 public class DefaultViewController {
+
+    private final ThymeleafModelAndViewBuilder thymeleafModelAndViewBuilder;
 
     @GetMapping
     public ModelAndView welcome() {
-        ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("index");
-        return modelAndView;
+        return thymeleafModelAndViewBuilder.build("index");
     }
 
 }
