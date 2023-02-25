@@ -1,6 +1,8 @@
 package gulas.saveli.finalLibrary.security.auth;
 
 import gulas.saveli.finalLibrary.library.controller.builder.ThymeleafModelAndViewBuilder;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +31,11 @@ public class AuthenticationController {
             @RequestBody RegisterRequest request
     ) {
         return ResponseEntity.ok(service.register(request));
+    }
+
+    public HttpServletResponse authenticateTest(@RequestBody AuthenticationRequest request) {
+        Cookie jwtCookie = new Cookie("user-id", service.authenticate(request).getToken());
+        return new HttpServletResponse().addCookie(jwtCookie);
     }
 
     @PostMapping("/authenticate")
