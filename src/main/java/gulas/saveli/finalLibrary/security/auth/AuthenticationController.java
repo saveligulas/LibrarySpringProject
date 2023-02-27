@@ -4,6 +4,7 @@ import gulas.saveli.finalLibrary.library.controller.builder.ThymeleafModelAndVie
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,8 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthenticationController {
-
+    @Autowired
     private final AuthenticationService service;
+    @Autowired
     private final ThymeleafModelAndViewBuilder thymeleafModelAndViewBuilder;
 
     @GetMapping("/register")
@@ -33,10 +35,10 @@ public class AuthenticationController {
         return ResponseEntity.ok(service.register(request));
     }
 
-    public HttpServletResponse authenticateTest(@RequestBody AuthenticationRequest request) {
-        Cookie jwtCookie = new Cookie("user-id", service.authenticate(request).getToken());
-        return new HttpServletResponse().addCookie(jwtCookie);
-    }
+//    public HttpServletResponse authenticateTest(@RequestBody AuthenticationRequest request) {
+//        Cookie jwtCookie = new Cookie("user-id", service.authenticate(request).getToken());
+//        return new HttpServletResponse().addCookie(jwtCookie);
+//    }
 
     @PostMapping("/authenticate")
     public ResponseEntity<AuthenticationResponse> authenticate (
