@@ -2,6 +2,7 @@ package gulas.saveli.finalLibrary.security.config;
 
 import gulas.saveli.finalLibrary.security.jwt.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -25,6 +26,8 @@ public class SecurityConfiguration {
                 .csrf()
                 .disable()
                 .authorizeHttpRequests()
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
+                .permitAll()
                 .requestMatchers("/")
                 .permitAll()
                 .requestMatchers("/auth/**")
