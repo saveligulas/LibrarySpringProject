@@ -29,7 +29,8 @@ public class AuthenticationController {
         return thymeleafModelAndViewBuilder.build("authenticate");
     }
 
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, value="/post/register")
     @ResponseBody
     public ResponseEntity<String> register (
             @RequestBody RegisterRequest request
@@ -42,7 +43,7 @@ public class AuthenticationController {
 //        return new HttpServletResponse().addCookie(jwtCookie);
 //    }
 
-    @PostMapping("/authenticate")
+    @PostMapping("/post/authenticate")
     @ResponseBody
     public ResponseEntity<AuthenticationResponse> authenticate (
             @RequestBody AuthenticationRequest request
