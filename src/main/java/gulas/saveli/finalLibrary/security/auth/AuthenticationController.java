@@ -5,6 +5,7 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,7 +29,8 @@ public class AuthenticationController {
         return thymeleafModelAndViewBuilder.build("authenticate");
     }
 
-    @PostMapping("/register")
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
     public ResponseEntity<String> register (
             @RequestBody RegisterRequest request
     ) {
@@ -41,6 +43,7 @@ public class AuthenticationController {
 //    }
 
     @PostMapping("/authenticate")
+    @ResponseBody
     public ResponseEntity<AuthenticationResponse> authenticate (
             @RequestBody AuthenticationRequest request
     ) {
