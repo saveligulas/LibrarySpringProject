@@ -27,7 +27,7 @@ const onSubmit = () => {
         }
     };
     
-    fetch('http://localhost:8080/auth/register', options);
+    fetch('http://localhost:8080/auth/post/register', options);
 
     console.log(options);
 };
