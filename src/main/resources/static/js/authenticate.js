@@ -7,3 +7,9 @@ const prepareParams = params => ({
     email: params.email,
     password: params.password
 });
+
+const addSubmitEventListener = () => {
+    submitButton.addEventListener('click', onSubmit);
+};
+
+addSubmitEventListener();
