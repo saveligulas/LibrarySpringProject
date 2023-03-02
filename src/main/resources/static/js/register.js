@@ -22,12 +22,26 @@ const onSubmit = () => {
     const options = {
         method: 'POST',
         body: JSON.stringify(data),
-        Headers: {
+        headers: {
             'Content-type': 'application/json'
         }
     };
+
+    fetch('http://localhost:8080/auth/post/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(function(response) {
+        // Handle success response
+    })
+    .catch(function(error) {
+        // Handle error response
+    });
     
-    fetch('http://localhost:8080/auth/post/register', options);
+    //fetch('http://localhost:8080/auth/post/register', options);
 
     console.log(options);
 };
