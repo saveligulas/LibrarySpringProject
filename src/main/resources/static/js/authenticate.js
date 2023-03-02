@@ -8,6 +8,26 @@ const prepareParams = params => ({
     password: params.password
 });
 
+const onSubmit = () => {
+    const email = emailHolder.value;
+    const password = passwordHolder.value;
+
+    const data = prepareParams({email, password});
+    const options = {
+        method: 'POST',
+        body: JSON.stringify(data),
+        Headers: {
+            'Content-type': 'application/json'
+        }
+    };
+    
+    fetch('http://localhost:8080/auth/post/authenticate', options)
+    .then(response => response.json)
+    .then(console.log(response));
+
+    console.log(options);
+};
+
 const addSubmitEventListener = () => {
     submitButton.addEventListener('click', onSubmit);
 };
