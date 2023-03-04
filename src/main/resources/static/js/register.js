@@ -18,14 +18,9 @@ const onSubmit = () => {
     const email = emailHolder.value;
     const password = passwordHolder.value;
 
+    const message = document.querySelector('#message');
+
     const data = prepareParams({firstName, lastName, email, password});
-    const options = {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-            'Content-type': 'application/json'
-        }
-    };
 
     fetch('http://localhost:8080/auth/post/register', {
         method: 'POST',
@@ -34,16 +29,16 @@ const onSubmit = () => {
         },
         body: JSON.stringify(data)
     })
-    .then(function(response) {
-        // Handle success response
+    .then(response => {
+        const text = response.text();
+        console.log(response,text);
+        message.textContent = text;
     })
-    .catch(function(error) {
-        // Handle error response
+    .catch(error => {
+        console.error(error.message);
+        const errorMessage = error.message.text();
+        message.textContent = errorMessage;
     });
-    
-    //fetch('http://localhost:8080/auth/post/register', options);
-
-    console.log(options);
 };
 
 const addSubmitEventListener = () => {
