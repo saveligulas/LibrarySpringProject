@@ -5,6 +5,9 @@ const passwordHolder = document.querySelector('#password');
 
 const submitButton = document.querySelector('#cta');
 
+const messageField = document.getElementById('messageLabel');
+const emailField = document.getElementById('email');
+
 const prepareParams = params => ({
     firstName: params.firstName,
     lastName: params.lastName,
@@ -18,7 +21,16 @@ const onSubmit = () => {
     const email = emailHolder.value;
     const password = passwordHolder.value;
 
-    const message = document.querySelector('#message');
+    if(lastName.length<1 || firstName.length<1){
+        messageField.textContent = "Your name cant be empty.";
+    }
+    if(password.length<8 || !/\d/.test(password) || !/[A-Z]/.test(password)) {
+        messageField.textContent = "Your password must be atleast 8 characters long, contain atleast 1 digit and 1 capitalized letter.";
+    }
+
+    fetch('http://localhost:8080/validator/email', {
+        
+    })
 
     const data = prepareParams({firstName, lastName, email, password});
 
@@ -30,14 +42,20 @@ const onSubmit = () => {
         body: JSON.stringify(data)
     })
     .then(response => {
-        const text = response.text();
-        console.log(response,text);
-        message.textContent = text;
+        if(!response.ok) {
+            return response.json().then(data => {
+                throw new Error(`API error: ${data.message}`);
+            });
+        } else {
+        console.log(response);
+        messageField.textContent = response.message;
+        }
+        
     })
     .catch(error => {
-        console.error(error.message);
-        const errorMessage = error.message.text();
-        message.textContent = errorMessage;
+        console.error(error);
+        messageField.textContent = "Email is already taken!";
+        emailField.value = '';
     });
 };
 
