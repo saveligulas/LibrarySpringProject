@@ -1,13 +1,10 @@
 package gulas.saveli.finalLibrary.library.controller;
 
-import gulas.saveli.finalLibrary.library.errorHandler.exception.EntityNotFoundException;
-import gulas.saveli.finalLibrary.library.errorHandler.exception.NameAlreadyTakenException;
 import gulas.saveli.finalLibrary.library.model.Book;
 import gulas.saveli.finalLibrary.library.service.BookService;
 import gulas.saveli.finalLibrary.repo.BookRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -45,13 +42,12 @@ public class AdminBookController {
             @RequestParam(required = false) Long genreId,
             @RequestParam(required = false) List<Long> genreIdList,
             @RequestParam(required = false) Long authorId,
-            @RequestParam(required = false) Long publisherId
-    ) throws NameAlreadyTakenException {
+            @RequestParam(required = false) Long publisherId){
         bookService.editBook(bookId, name, genreId, genreIdList, authorId, publisherId);
     }
 
     @DeleteMapping("/delete/{bookId}")
-    public void deleteById(@PathVariable("bookId") Long bookId) throws EntityNotFoundException {
+    public void deleteById(@PathVariable("bookId") Long bookId) {
         bookService.deleteById(bookId);
     }
 }
