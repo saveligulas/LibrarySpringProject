@@ -32,10 +32,10 @@ public class AuthenticationController {
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, value="/post/register")
     @ResponseBody
-    public ResponseEntity<String> register (
+    public String register (
             @RequestBody RegisterRequest request
     ) {
-        return ResponseEntity.ok(service.register(request));
+        return service.register(request);
     }
 
 //    public HttpServletResponse authenticateTest(@RequestBody AuthenticationRequest request) {
