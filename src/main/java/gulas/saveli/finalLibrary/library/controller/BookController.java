@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Collection;
 
 @RestController
-@RequestMapping(path = "api/book")
+@RequestMapping(path = "/api/book")
 public class BookController {
     private final BookService bookService;
     private final BookRepository bookRepository;
