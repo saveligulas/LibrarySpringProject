@@ -1,5 +1,6 @@
 package gulas.saveli.finalLibrary.security.auth;
 
+import gulas.saveli.finalLibrary.library.errorHandler.handler.ApiRequestException;
 import gulas.saveli.finalLibrary.repo.UserRepository;
 import gulas.saveli.finalLibrary.security.jwt.JwtService;
 import gulas.saveli.finalLibrary.user.Role;
@@ -32,7 +33,7 @@ public class AuthenticationService {
             userRepository.save(user);
             return "User registered successfully";
         } else {
-            throw new IllegalStateException("User with email already exists");
+            throw new ApiRequestException("User with email already exists");
         }
 
 //        var jwtToken = jwtService.generateToken(user);
