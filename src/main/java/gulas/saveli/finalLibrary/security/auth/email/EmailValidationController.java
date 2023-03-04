@@ -17,7 +17,7 @@ public class EmailValidationController {
     @CrossOrigin
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, value="/email")
     @ResponseBody
-    public String register (String email) {
-        return emailValidationService.validateEmail(email);
+    public String register (@RequestBody EmailRequest request) {
+        return emailValidationService.validateEmail(request.getEmail());
     }
 }
