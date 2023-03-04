@@ -23,14 +23,41 @@ const onSubmit = () => {
 
     if(lastName.length<1 || firstName.length<1){
         messageField.textContent = "Your name cant be empty.";
+        return;
     }
     if(password.length<8 || !/\d/.test(password) || !/[A-Z]/.test(password)) {
         messageField.textContent = "Your password must be atleast 8 characters long, contain atleast 1 digit and 1 capitalized letter.";
+        return;
     }
+    
+    var emailValid;
 
     fetch('http://localhost:8080/validator/email', {
-        
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            email: email
+        })
     })
+    .then(response => {
+        if(!response.ok) {  
+            throw new Error(`API error: Email is not valid`);
+        } else {
+            console.log(response);
+            emailValid = true;
+        }
+    })
+    .catch(error => {
+        console.error(error);
+        messageField.textContent = "Email is not valid";
+        emailValid = false;
+    })
+
+    if(!emailValid) {
+        return;
+    }
 
     const data = prepareParams({firstName, lastName, email, password});
 
@@ -47,8 +74,9 @@ const onSubmit = () => {
                 throw new Error(`API error: ${data.message}`);
             });
         } else {
-        console.log(response);
-        messageField.textContent = response.message;
+            console.log(response);
+            messageField.textContent = "User registered succesfully";
+            window.location.href = "http://localhost:8080/api/book";
         }
         
     })
