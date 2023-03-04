@@ -38,6 +38,8 @@ public class SecurityConfiguration {
                 .permitAll()
                 .requestMatchers(HttpMethod.POST, "/auth/post/**")
                 .permitAll()
+                .requestMatchers(HttpMethod.POST, "/validator/**")
+                .permitAll()
                 .requestMatchers("/")
                 .permitAll()
                 .requestMatchers("/auth/**")
