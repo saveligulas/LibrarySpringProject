@@ -3,6 +3,7 @@ package gulas.saveli.finalLibrary.library.controller;
 import gulas.saveli.finalLibrary.library.model.Book;
 import gulas.saveli.finalLibrary.library.service.BookService;
 import gulas.saveli.finalLibrary.repo.BookRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,14 +11,12 @@ import java.util.Collection;
 
 @RestController
 @RequestMapping(path = "/api/book")
+@RequiredArgsConstructor
 public class BookController {
-    private final BookService bookService;
-    private final BookRepository bookRepository;
+
     @Autowired
-    public BookController(BookService bookService, BookRepository bookRepository) {
-        this.bookService = bookService;
-        this.bookRepository = bookRepository;
-    }
+    private final BookService bookService;
+
 
     @GetMapping
     public Collection<Book> getAll() {
