@@ -14,7 +14,7 @@ const onSubmit = () => {
 
     const loginData = prepareParams({email, password});
     
-    fetch('https://example.com/login', {
+    fetch('http://localhost:8080/auth/post/authenticate', {
     method: 'POST',
     body: JSON.stringify(loginData),
     headers: { 'Content-Type': 'application/json' },
