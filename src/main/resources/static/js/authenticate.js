@@ -12,21 +12,25 @@ const onSubmit = () => {
     const email = emailHolder.value;
     const password = passwordHolder.value;
 
-    const data = prepareParams({email, password});
-    const options = {
-        method: 'POST',
-        body: JSON.stringify(data),
-        Headers: {
-            'Content-type': 'application/json'
-        }
-    };
+    const loginData = prepareParams({email, password});
     
-    fetch('http://localhost:8080/auth/post/authenticate', options)
-    .then(response => response.json)
-    .then(console.log(response));
+    fetch('https://example.com/login', {
+    method: 'POST',
+    body: JSON.stringify(loginData),
+    headers: { 'Content-Type': 'application/json' },
+    })
+    .then(response => response.json())
+    .then(data => {
+    
+        const token = data.token;
 
-    console.log(options);
-};
+
+        document.cookie = `token=${token}; path=/;`;
+    })
+    .catch(error => console.error(error));
+
+    console.log(token);
+    };
 
 const addSubmitEventListener = () => {
     submitButton.addEventListener('click', onSubmit);
