@@ -3,7 +3,7 @@
       xmlns:th="http://www.thymeleaf.org">
     <meta charset="ISO-8859-1">
 <head>
-    <link href="/src/main/resources/static/css/registerAndLoginForm.css" rel="stylesheet"/>
+    <link href="../css/registerAndLoginForm.css" th:href="@{/css/registerAndLoginForm.css}" type="text/css"  rel="stylesheet"/>
 </head>
 <body>
     <main>
@@ -26,6 +26,7 @@
             </div>
         </section>
     </main>
+    <script src="../js/authenticate.js"></script>
 </body>
 
 </html>
