@@ -53,7 +53,7 @@ public class AuthenticationService {
                     .build();
             userRepository.save(admin);
         } else {
-            throw new IllegalStateException("User with email already exists");
+            throw new ApiRequestException("User with email already exists");
         }
     }
 
@@ -65,7 +65,7 @@ public class AuthenticationService {
                 )
         );
         var user = userRepository.findByEmail(request.getEmail())
-                .orElseThrow(() -> new IllegalStateException("user with email " + request.getEmail() + " does not exist"));
+                .orElseThrow(() -> new ApiRequestException("user with email " + request.getEmail() + " does not exist"));
         var jwtToken = jwtService.generateToken(user);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
