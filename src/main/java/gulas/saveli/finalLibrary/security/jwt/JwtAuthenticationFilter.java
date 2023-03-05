@@ -2,6 +2,7 @@ package gulas.saveli.finalLibrary.security.jwt;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -30,14 +31,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             @NonNull FilterChain filterChain
     ) throws ServletException, IOException {
         //final String authHeader = request.getHeader("Authorization");
-        String authHeader = "";
+        String authHeader = null;
 
         if(request.getCookies()!= null) {
-            for(var cookie: request.getCookies()) {
+            for(Cookie cookie: request.getCookies()) {
                 if(cookie.getName().equals("Authorization")) {
+                    System.out.println(cookie.getValue());
                     authHeader = cookie.getValue();
                 }
             }
+        } else {
+            filterChain.doFilter(request, response);
+            return;
         }
 
         final String jwt;
