@@ -23,13 +23,11 @@ const onSubmit = () => {
     .then(data => {
     
         const token = data.token;
-
+        console.log(token);
 
         document.cookie = `token=${token}; path=/;`;
     })
     .catch(error => console.error(error));
-
-    console.log(token);
     };
 
 const addSubmitEventListener = () => {
