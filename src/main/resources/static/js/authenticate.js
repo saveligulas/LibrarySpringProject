@@ -22,10 +22,11 @@ const onSubmit = () => {
     .then(response => response.json())
     .then(data => {
     
-        const token = data.token;
+        const token = "Bearer "+data.token;
+        console.log(data.token);
         console.log(token);
 
-        document.cookie = `token=${token}; path=/;`;
+        document.cookie = `Authorization=${token}; path=/;`;
     })
     .catch(error => console.error(error));
     };
