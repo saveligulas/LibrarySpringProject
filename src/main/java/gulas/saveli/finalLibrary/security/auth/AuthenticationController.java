@@ -43,6 +43,7 @@ public class AuthenticationController {
 //        return new HttpServletResponse().addCookie(jwtCookie);
 //    }
 
+    @CrossOrigin
     @PostMapping("/post/authenticate")
     @ResponseBody
     public AuthenticationResponse authenticate (
