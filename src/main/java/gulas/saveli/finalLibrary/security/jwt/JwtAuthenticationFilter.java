@@ -43,7 +43,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     authHeader = cookie.getValue();
                 }
             }
+            if(authHeader != null) {
+                System.out.println("Authorization cookie not found");
+            }
         } else {
+            System.out.println("No cookie found");
             authHeader = request.getHeader("Authorization");
         }
 
