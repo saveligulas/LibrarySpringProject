@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 @Component
 @RequiredArgsConstructor
@@ -36,8 +37,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         Cookie[] cookies = request.getCookies();
 
+        System.out.println(Arrays.toString(cookies));
+
         if(cookies != null) {
             for(Cookie cookie: cookies) {
+                System.out.println(cookie.getName());
                 if(cookie.getName().equals("Authorization")) {
                     System.out.println(cookie.getValue());
                     authHeader = cookie.getValue();
