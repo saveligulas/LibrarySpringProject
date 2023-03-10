@@ -20,7 +20,7 @@ public class DefaultViewController {
     private final ThymeleafModelAndViewBuilder thymeleafModelAndViewBuilder;
 
     @GetMapping
-    public ModelAndView welcome() {
+    public ModelAndView defaultView() {
         return thymeleafModelAndViewBuilder.build("index");
     }
 
